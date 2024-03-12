@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 
 #Reading in CSV file 
 df = pd.read_csv(r"C:\Users\Iaine\.vscode\Python Projects\ACNH Project\ACNH Items\headwear.csv")
@@ -46,4 +47,17 @@ print(group_by_colors_df)
 group_by_hats_df = df.groupby("Name").count().filter(items = ["Variation"]).rename(columns = {"Variation" : "Color Variations"}).sort_values(by = "Color Variations", ascending = False)
 print(group_by_hats_df)
 
-print(df.filter(items = ["Name","Buy","Sell"]))
+
+
+
+#Making a linear regression plot of Buy Prices Vs. Sell Prices On Headwear In ACNH
+df["Buy"] = df["Buy"].astype("int") #Making "Buy" Prices integers instead of strings 
+df_modified = df.sort_values("Buy") #Sorting the "Buy" Prices
+df_modified = df.drop(df_modified[(df_modified.Buy == 0) | (df_modified.Buy == 1200000) | (df_modified.Buy == 1000000)].index) # Dropping the two largest outliers, and taking out NFS headwear
+
+LR_Buy_Sell = px.scatter(x = df_modified["Buy"], y = df_modified["Sell"], trendline = "ols", labels = {
+"x" : "Buy Price (Coins)",
+"y" : "Sell Price (Coins)"
+}, title = "Buy Price Vs. Sell Price Relationship In ACNH") 
+LR_Buy_Sell.show() 
+
