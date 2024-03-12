@@ -46,4 +46,4 @@ print(group_by_colors_df)
 group_by_hats_df = df.groupby("Name").count().filter(items = ["Variation"]).rename(columns = {"Variation" : "Color Variations"}).sort_values(by = "Color Variations", ascending = False)
 print(group_by_hats_df)
 
-#Noticed that there is headwear with no variation, how would I delete those from the column???
+print(df.filter(items = ["Name","Buy","Sell"]))
