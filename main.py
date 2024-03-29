@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 
 #Reading in CSV file 
-df = pd.read_csv(r"C:\Users\Iaine\.vscode\Python Projects\ACNH Project\ACNH Items\headwear.csv")
+df = pd.read_csv("C:/Users/Iaine/.vscode/Python Projects/ACNH Headwear Data Cleaning & Linear Regression/ACNH Items/headwear.csv")
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 print(df.head())
@@ -61,3 +61,4 @@ LR_Buy_Sell = px.scatter(x = df_modified["Buy"], y = df_modified["Sell"], trendl
 }, title = "Buy Price Vs. Sell Price Relationship In ACNH") 
 LR_Buy_Sell.show() 
 
+#From data we can see that there is a positive linear relationship between the sell prices and buy prices of headgear in Animal Crossing New Horizons
